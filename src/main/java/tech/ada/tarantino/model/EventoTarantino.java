@@ -1,6 +1,6 @@
-package br.ada.projEstatisticas.models;
+package tech.ada.tarantino.model;
 
-import br.ada.projEstatisticas.dto.EventoDTO;
+import tech.ada.tarantino.dto.EventoDTO;
 
 import java.time.LocalTime;
 
@@ -9,8 +9,7 @@ public class EventoTarantino {
     String movie;
     String eventType;
     String cursingWord;
-    // TODO: Mudar para LocalTime usando o Formatter
-    String minutesInMovie;
+    LocalTime minutesInMovie;
 
     public String getMovie() {
         return movie;
@@ -36,12 +35,12 @@ public class EventoTarantino {
         this.cursingWord = cursingWord;
     }
 
-    public String getMinutesInMovie() {
+    public LocalTime getMinutesInMovie() {
         return minutesInMovie;
     }
 
     public void setMinutesInMovie(String minutesInMovie) {
-        this.minutesInMovie = minutesInMovie;
+        this.minutesInMovie = convertToTime(minutesInMovie);
     }
 
     public EventoTarantino convertToEventoTarantino(EventoDTO eventoDTO) {
@@ -51,5 +50,25 @@ public class EventoTarantino {
         evento.setCursingWord(eventoDTO.cursingWord());
         evento.setMinutesInMovie(eventoDTO.minutesInMovie());
         return evento;
+    }
+
+    private static LocalTime convertToTime(String timeString) {
+        String[] parts = timeString.split("\\.");
+        int hoursInMinutes = Integer.parseInt(parts[0]);
+        int hours;
+        int minutes;
+        if (hoursInMinutes >= 120) {
+            hours = 2;
+            minutes = hoursInMinutes - 120;
+        } else if (hoursInMinutes >= 60) {
+            hours = 1;
+            minutes = hoursInMinutes - 60;
+        } else {
+            hours = hoursInMinutes / 60;
+            minutes = hoursInMinutes;
+        }
+        int secondsInDecimal = Integer.parseInt(parts[1]);
+        int seconds = (int) (secondsInDecimal * 0.6);
+        return LocalTime.of(hours, minutes, seconds);
     }
 }

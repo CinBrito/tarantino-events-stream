@@ -1,6 +1,4 @@
-package br.ada.projEstatisticas.dto;
-
-import java.time.LocalTime;
+package tech.ada.tarantino.dto;
 
 public record EventoDTO(String movie, String eventType, String cursingWord, String minutesInMovie) {
 

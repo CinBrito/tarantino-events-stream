@@ -1,7 +1,7 @@
-package br.ada.projEstatisticas.repository;
+package tech.ada.tarantino.repository;
 
-import br.ada.projEstatisticas.models.EventoTarantino;
-import br.ada.projEstatisticas.dto.EventoDTO;
+import tech.ada.tarantino.dto.EventoDTO;
+import tech.ada.tarantino.model.EventoTarantino;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.ada.projEstatisticas.dto.EventoDTO.converterEmDTO;
+import static tech.ada.tarantino.dto.EventoDTO.converterEmDTO;
 
 public class ParticipanteRepository {
     String caminho;
@@ -41,6 +41,5 @@ public class ParticipanteRepository {
 
         return eventos;
     }
-
 
 }
